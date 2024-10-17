@@ -1,0 +1,12 @@
+
+.not-start {
+  color: #999999;
+}
+
+.success {
+  color: green;
+}
+
+.failed {
+  color: red;
+}

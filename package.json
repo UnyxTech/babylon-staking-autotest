@@ -1,0 +1,50 @@
+{
+  "name": "babylon-staking-autotest",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "start": "node ./server/scripts/start.cjs",
+    "test:okx": "npm run test -- --wallet=okx",
+    "test:tomo": "npm run test -- --wallet=tomo",
+    "test:bitget": "npm run test -- --wallet=bitget",
+    "test:onekey": "npm run test -- --wallet=onekey",
+    "test:all": "npm run test -- --wallet=all",
+    "test": "node ./server/scripts/testController.cjs",
+    "stake": "node ./server/index.cjs"
+  },
+  "dependencies": {
+    "@bitcoin-js/tiny-secp256k1-asmjs": "^2.2.3",
+    "@tomo-inc/tomo-wallet-provider": "^1.0.11",
+    "axios": "^1.7.7",
+    "bitcoinjs-lib": "^6.1.5",
+    "btc-staking-ts": "^0.2.10",
+    "chalk": "^5.3.0",
+    "express": "^4.21.0",
+    "express-formidable": "^1.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "selenium-webdriver": "^4.24.0",
+    "shelljs": "^0.8.5",
+    "url-safe-base64": "^1.3.0",
+    "vite-plugin-node-polyfills": "^0.22.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "@types/node": "^22.5.4",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^9.9.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "globals": "^15.9.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.0.1",
+    "vite": "^5.4.1"
+  }
+}
