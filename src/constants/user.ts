@@ -47,8 +47,10 @@ const dataTomo: IUserData = {
 // The key here corresponds to the wallet parameter in the URL.
 // The addresses and public keys in the data can also be obtained directly by calling methods from the provider.
 export const walletDataMap: Record<walletTypes, IUserData> = {
-  okx: dataCommon,
-  tomo: dataTomo,
-  onekey: dataCommon,
-  bitget: dataCommon,
+  bitcoin_okx: dataCommon,
+  bitcoin_tomo: dataTomo,
+  bitcoin_bitget: dataCommon,
+  bitcoin_onekey: dataCommon,
+  cosmos_keplr: dataCommon,
 }
+

@@ -8,10 +8,9 @@ export const isTaproot = (address: string): boolean => {
 }
 
 export const sleepTime = (time: number) => {
-  let count = 0
-  const sleep = Date.now() + time
-  while (Date.now() < sleep) { count++ }
-  return count
+  return new Promise((resolve) => {
+    setTimeout(resolve, time)
+  })
 }
 
 export const formatParams = (paramsStr: string): Record<string, string> => {

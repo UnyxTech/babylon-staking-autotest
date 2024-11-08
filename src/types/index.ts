@@ -51,7 +51,7 @@ export interface UTXO {
 
 export type SignStakingTxType = Promise<{ signedStakingTxHex: string; stakingTerm: number; txId?: string }>
 
-export type walletTypes = 'okx' | 'tomo' | 'onekey' | 'bitget'
+export type walletTypes = 'bitcoin_okx' | 'bitcoin_tomo' | 'bitcoin_bitget' | 'bitcoin_onekey' | 'cosmos_keplr'
 
 export interface IUserData {
   ADDRESS: string

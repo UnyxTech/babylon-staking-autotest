@@ -3,6 +3,7 @@ import autoTestController from '@/utils/autoTestController'
 import { formatParams } from '@/utils'
 import { status } from '@/constants/page'
 import './index.css'
+import autoTestCosmosController from "@/utils/autoTestCosmosController.ts";
 
 function Home() {
   const [wallet, setWallet] = useState('')
@@ -24,10 +25,21 @@ function Home() {
 
   useEffect(() => {
     initPage()
-    autoTestController.start({
-      setStakeResult,
-      setUnbondingResult,
-    })
+    const params = formatParams(location.search)
+    const {wallet} = params
+    console.log("wallet", wallet)
+    if(wallet.startsWith('bitcoin')){
+      autoTestController.start({
+        setStakeResult,
+        setUnbondingResult,
+      })
+    }else if(wallet.startsWith('cosmos')){
+      autoTestCosmosController.start({
+        setStakeResult,
+        setUnbondingResult,
+      })
+    }
+
   }, [])
 
   const getShowClass = (stat: string) => {
