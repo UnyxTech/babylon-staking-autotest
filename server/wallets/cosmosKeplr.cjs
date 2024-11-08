@@ -3,10 +3,10 @@ const walletType = require('../constants/walletType.cjs')
 const { mnemonicsWords, password } = require('../constants/user.cjs')
 const BaseWallet = require('./baseWallet.cjs')
 
-class KeplrWallet extends BaseWallet {
+class CosmosKeplrWallet extends BaseWallet {
   constructor() {
     super()
-    this.name = walletType.KEPLR
+    this.name = walletType.COSMOS_KEPLR
   }
 
   async takeControll() {
@@ -94,4 +94,4 @@ class KeplrWallet extends BaseWallet {
   }
 }
 
-module.exports = new KeplrWallet()
+module.exports = new CosmosKeplrWallet()

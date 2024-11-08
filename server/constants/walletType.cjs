@@ -6,5 +6,6 @@ module.exports = {
   TOMO: 'bitcoin_tomo',
   BITGET: 'bitcoin_bitget',
   ONEKEY: 'bitcoin_onekey',
-  KEPLR: 'cosmos_keplr'
+  COSMOS_KEPLR: 'cosmos_keplr',
+  COSMOS_OKX: 'cosmos_okx',
 }

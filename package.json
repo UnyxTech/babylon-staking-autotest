@@ -13,7 +13,10 @@
     "test:tomo": "npm run test -- --wallet=bitcoin_tomo",
     "test:bitget": "npm run test -- --wallet=bitcoin_bitget",
     "test:onekey": "npm run test -- --wallet=bitcoin_onekey",
-    "test:keplr": "npm run test -- --wallet=cosmos_keplr",
+    "test:cosmos_keplr": "npm run test -- --wallet=cosmos_keplr",
+    "test:cosmos_okx": "npm run test -- --wallet=cosmos_okx",
+    "test:all-bitcoin": "npm run test -- --wallet=all --chain=bitcoin",
+    "test:all-cosmos": "npm run test -- --wallet=all --chain=cosmos",
     "test:all": "npm run test -- --wallet=all",
     "test": "node ./server/scripts/testController.cjs",
     "stake": "node ./server/index.cjs"

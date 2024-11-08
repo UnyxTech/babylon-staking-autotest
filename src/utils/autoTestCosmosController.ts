@@ -34,10 +34,10 @@ class AutoTestCosmosController extends TestController{
       await this.initWallet(wallet)
       const result = await this.signMessage()
       console.log('sign result ==>', result)
-      setUnbondingResult(result?.signature ? status.success : status.failed)
+      setStakeResult(result?.signature ? status.success : status.failed)
     }catch (e){
       console.log('error ==>', e)
-      setUnbondingResult(status.failed)
+      setStakeResult(status.failed)
     }
 
 

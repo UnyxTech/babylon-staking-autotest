@@ -41,11 +41,15 @@ const extensionCollections = {
     getCrxPath: createCrxPathGetFn(walletType.BITGET),
     extId: 'jiidiaalihmmhddjgbnbgdfflelocpak',
   },
-  [walletType.KEPLR]: {
-    getCrxPath: createCrxPathGetFn(walletType.KEPLR),
+  [walletType.COSMOS_KEPLR]: {
+    getCrxPath: createCrxPathGetFn(walletType.COSMOS_KEPLR),
     extId: 'dmkamcknogkgcdfhhbddcghachkejeap',
   },
 }
+Object.assign(extensionCollections, {
+  [walletType.COSMOS_OKX]: extensionCollections[walletType.OKX]
+})
+
 
 const processRes = {
   success: 'succeeded',
