@@ -12,6 +12,7 @@ import { signUnbondingTx } from './signUnbondingTx'
 import  * as twp from '@tomo-inc/tomo-wallet-provider'
 import { WalletProvider } from '@/types/walletProvider'
 import { walletTypes } from '@/types'
+import {BTCProvider} from "@tomo-inc/tomo-wallet-provider";
 
 initEccLib(ecc)
 
@@ -32,7 +33,7 @@ class AutoTestController extends TestController{
   publicKey: string
   delegation: any
   utxos: any
-  btcWallet: null | WalletProvider
+  btcWallet: null | BTCProvider
 
   constructor() {
     super()
@@ -105,7 +106,7 @@ class AutoTestController extends TestController{
 
     if (walletMeta) {
       // @ts-ignore
-      const walletProvider = new walletMeta.connectProvider()
+      const walletProvider = new walletMeta.connectProvider() as BTCProvider
 
       // @ts-ignore
       console.log('walletProvider ==>', window.walletProvider = walletProvider)

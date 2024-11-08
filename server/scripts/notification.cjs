@@ -60,7 +60,7 @@ class TgBotMessager {
       if (!chatIds.length) {
         return console.log('No Chat ID is available and messages cannot be sent.')
       }
-
+      console.log("sendMessage: ", message)
       // Create all promises that send requests
       const requests = [...chatIds].map((chatId) => axios.post(url, { chat_id: chatId, text: message }))
       const res = await Promise.all(requests)

@@ -37,6 +37,10 @@ const extensionCollections = {
     getCrxPath: createCrxPathGetFn(walletType.ONEKEY),
     extId: 'jnmbobjmhlngoefaiojfljckilhhlhcj',
   },
+  [walletType.BITGET]: {
+    getCrxPath: createCrxPathGetFn(walletType.BITGET),
+    extId: 'jiidiaalihmmhddjgbnbgdfflelocpak',
+  },
   [walletType.KEPLR]: {
     getCrxPath: createCrxPathGetFn(walletType.KEPLR),
     extId: 'dmkamcknogkgcdfhhbddcghachkejeap',
