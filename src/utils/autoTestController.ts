@@ -12,10 +12,15 @@ import { signUnbondingTx } from './signUnbondingTx'
 import  * as twp from '@tomo-inc/tomo-wallet-provider'
 import { WalletProvider } from '@/types/walletProvider'
 import { walletTypes } from '@/types'
+import {BTCProvider} from "@tomo-inc/tomo-wallet-provider";
 
 initEccLib(ecc)
 
-class AutoTestController {
+export abstract class TestController{
+  abstract start({ setStakeResult, setUnbondingResult }: any): Promise<void>
+}
+
+class AutoTestController extends TestController{
   urlParams: any
   globalParams: any
   btcHeight: number
@@ -28,9 +33,10 @@ class AutoTestController {
   publicKey: string
   delegation: any
   utxos: any
-  btcWallet: null | WalletProvider
+  btcWallet: null | BTCProvider
 
   constructor() {
+    super()
     this.globalParams = null
     this.btcHeight = 0
     this.fees = null
@@ -50,18 +56,21 @@ class AutoTestController {
     const params = formatParams(location.search)
     console.log('params ==>', params)
 
-    if (!params.wallet || !Object.keys(walletDataMap).includes(params.wallet)) {
+    const {wallet} = params
+
+
+    if (!wallet || !Object.keys(walletDataMap).includes(wallet)) {
       return console.log('Err: Unsupported wallet!')
     }
 
-    const walletData = walletDataMap[params.wallet as walletTypes]
+    const walletData = walletDataMap[wallet as walletTypes]
 
     this.address = walletData.ADDRESS
     this.publicKey = walletData.PUBLIC_KEY
     this.delegation = walletData.DELEGATION
 
     // 2. choose provider according to wallet
-    await this.initWallet((params.wallet || '') as string)
+    await this.initWallet(wallet)
 
     // switch
     // return
@@ -90,21 +99,23 @@ class AutoTestController {
     console.log('twp ==>', window.twp = twp)
     // @ts-ignore
     await twp.__tla
-    const walletMeta = twp.walletList.find(v => v.id === `bitcoin_${walletId}`)
+    const walletMeta = twp.walletList.find(v => v.id === `${walletId}`)
 
     // @ts-ignore
     console.log('walletMeta ==>', window.walletMeta = walletMeta)
 
     if (walletMeta) {
       // @ts-ignore
-      const walletProvider = new walletMeta.connectProvider()
+      const walletProvider = new walletMeta.connectProvider() as BTCProvider
 
       // @ts-ignore
       console.log('walletProvider ==>', window.walletProvider = walletProvider)
 
       await walletProvider.connectWallet()
-      sleepTime(1000)
+      await sleepTime(1000)
+
       await walletProvider.switchNetwork('signet')
+
 
       const address = await walletProvider.getAddress()
 

@@ -6,19 +6,20 @@ const utils = require('../utils/index.cjs')
 const createCrxPathGetFn = (name) => {
   let params
   let files
+  const walletName = name.split('_')[1]
   return () => {
-    let filePath = path.resolve(__dirname, `../crxs/${name}_wallet.crx`)
+    let filePath = path.resolve(__dirname, `../crxs/${walletName}_wallet.crx`)
     try {
       if (!params) params = utils.getStartParams()
       if (!files) files = fs.readdirSync(params.crxsDownloadDir)
-      const filename = files.find((v) => v.startsWith(`${name}_wallet`))
+      const filename = files.find((v) => v.startsWith(`${walletName}_wallet`))
       if (filename) {
         filePath = path.join(params.crxsDownloadDir, filename)
       }
     } catch (err) {
       console.log('getCrxPath err: ', err)
     }
-    console.log(`${name} crxPath: `, filePath)
+    console.log(`${walletName} crxPath: `, filePath)
     return filePath
   }
 }
@@ -40,7 +41,15 @@ const extensionCollections = {
     getCrxPath: createCrxPathGetFn(walletType.BITGET),
     extId: 'jiidiaalihmmhddjgbnbgdfflelocpak',
   },
+  [walletType.COSMOS_KEPLR]: {
+    getCrxPath: createCrxPathGetFn(walletType.COSMOS_KEPLR),
+    extId: 'dmkamcknogkgcdfhhbddcghachkejeap',
+  },
 }
+Object.assign(extensionCollections, {
+  [walletType.COSMOS_OKX]: extensionCollections[walletType.OKX]
+})
+
 
 const processRes = {
   success: 'succeeded',

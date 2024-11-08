@@ -30,13 +30,12 @@ class BaseWallet {
   async createDriver(config) {
     // Set Chrome options
     let options = new chrome.Options()
-
+    options.addArguments('--lang=en')
     // Set the preferred website language to English
     // Note: For the chrome browser itself, you need to set the system language
     options.setUserPreferences({
       'intl.accept_languages': 'en,en-US',
     })
-
     // The extension allows you to add others
     const extensions = [extensionCollections[this.name]]
     if (config?.extraExtensions) {

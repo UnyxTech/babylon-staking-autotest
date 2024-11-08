@@ -24,17 +24,19 @@ const downloader = new Downloader({ outputDir: envConfig.crxsDownloadDir })
 startExecTest()
 
 async function startExecTest() {
-  if (startParams.wallet !== 'all') {
-    await downloader.check([startParams.wallet])
-    sh.exec(`npm run stake -- --wallet=${startParams.wallet} ${shellEnvString}`)
-  } else {
-    // exec in order
-    const allWallets = Object.values(walletType)
-    await downloader.check(allWallets)
-    for (let i = 0; i < allWallets.length; i++) {
-      sh.exec(`npm run stake -- --wallet=${allWallets[i]} ${shellEnvString}`)
-    }
+  const {wallet, chain} = startParams
+  let execWallets = Object.values(walletType)
+  if (wallet !== 'all') {
+    execWallets = [wallet]
+  }else if(chain){
+    execWallets = execWallets.filter((w) => w.startsWith(chain))
   }
+  console.log('execWallets', execWallets)
+  // await downloader.check(execWallets)
+  for (let i = 0; i < execWallets.length; i++) {
+    sh.exec(`npm run stake -- --wallet=${execWallets[i]} ${shellEnvString}`)
+  }
+
   await notification.toTelegram({
     logPath: outputLogFilePath,
     tgInfo: envConfig.tgInfo,
